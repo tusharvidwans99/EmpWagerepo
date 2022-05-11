@@ -6,8 +6,10 @@ WAGE_PER_HOUR=20
 isFulltime=1
 isParttime=0
 MAX_DAYS=20
-
-for (( i=0;i<$MAX_DAYS;i++ ))
+days=1
+work_completed=0
+MAX_WORK_HOUR_IN_MONTH=100
+while [[ $days -le $MAX_DAYS && $work_completed -lt $MAX_WORK_HOUR_IN_MONTH ]]
 do
 empcheck=$((RANDOM%3))
 
@@ -22,7 +24,8 @@ case $empcheck in
 		daily_work_hr=0
 		;;
 esac
-
+work_completed=$(( $work_completed+$daily_work_hr ))
 salary=$(( $WAGE_PER_HOUR*$daily_work_hr ))
 echo $salary
+days=$(($days+1))
 done
