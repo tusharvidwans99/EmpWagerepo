@@ -5,8 +5,8 @@ echo Welcome to Employee Wage Computation
 WAGE_PER_HOUR=20
 isFulltime=1
 isParttime=0
-MAX_DAYS=20
-days=1
+MAX_DAYS=19
+days=0
 work_completed=0
 MAX_WORK_HOUR_IN_MONTH=100
 
@@ -32,7 +32,9 @@ do
 empcheck=$((RANDOM%3))
 work_hours
 work_completed=$(( $work_completed+$daily_work_hr ))
-salary=$(( $WAGE_PER_HOUR*$daily_work_hr ))
-echo $salary
+salary[$days]=$(( $WAGE_PER_HOUR*$daily_work_hr ))
+Total_wage=$(( $Total_wage+${salary[$days]} ))
 days=$(($days+1))
 done
+echo ${salary[@]}
+echo Total salary: $Total_wage
