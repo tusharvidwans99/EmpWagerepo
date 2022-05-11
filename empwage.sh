@@ -1,5 +1,5 @@
 #!/bin/bash -x
-
+declare -A salary
 echo Welcome to Employee Wage Computation
 
 WAGE_PER_HOUR=20
@@ -32,9 +32,10 @@ do
 empcheck=$((RANDOM%3))
 work_hours
 work_completed=$(( $work_completed+$daily_work_hr ))
-salary[$days]=$(( $WAGE_PER_HOUR*$daily_work_hr ))
-Total_wage=$(( $Total_wage+${salary[$days]} ))
+salary[Day_$days]=$(( $WAGE_PER_HOUR*$daily_work_hr ))
+Total_wage=$(( $Total_wage+${salary[Day_$days]} ))
 days=$(($days+1))
 done
+echo ${!salary[@]}
 echo ${salary[@]}
 echo Total salary: $Total_wage
